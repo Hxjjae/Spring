@@ -1,5 +1,9 @@
 # db config
 spring:
+  servlet:
+    multipart:
+      max-file-size: 3MB
+      max-request-size: 12MB
   mvc:
     static-path-pattern: /static/**
   datasource:
@@ -19,3 +23,7 @@ mybatis:
 springdoc:
   swagger-ui:
     path: /swagger.html
+
+
+file:
+  dir: D:\download\
