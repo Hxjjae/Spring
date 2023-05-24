@@ -29,6 +29,6 @@ public class FileuploadController {
                            , @RequestPart MultipartFile img) {
         LOGGER.info("dto : " + dto);
         LOGGER.info("imgFileName: " + img.getOriginalFilename());
-        service.fileUpload(img);
+        service.fileUpload(dto, img);
     }
 }

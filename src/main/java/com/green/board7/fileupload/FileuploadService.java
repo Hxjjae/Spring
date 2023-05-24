@@ -1,5 +1,8 @@
 package com.green.board7.fileupload;
 
+import com.green.board7.fileupload.model.FileEntity;
+import com.green.board7.fileupload.model.FileuploadInsDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,11 +13,18 @@ import java.util.UUID;
 
 @Service
 public class FileuploadService {
+    private final FileuploadMapper mapper;
+
+    @Autowired
+    public FileuploadService(FileuploadMapper mapper) {
+        this.mapper = mapper;
+    }
+
 
     @Value("${file.dir}")
     private String fileDir;
 
-    public void fileUpload(MultipartFile img) {
+    public void fileUpload(FileuploadInsDto dto ,MultipartFile img) {
         System.out.println("fileDir : " + fileDir);
 
         //원래 파일 이름 추출
@@ -34,5 +44,11 @@ public class FileuploadService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        FileEntity entity = FileEntity.builder()
+                            .path(savedFilePath)
+                            .uploader(dto.getUploader())
+                            .levelValue(dto.getLevelValue())
+                            .build();
+        mapper.insFile(entity);
     }
 }
