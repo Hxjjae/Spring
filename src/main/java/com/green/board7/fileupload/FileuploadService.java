@@ -32,6 +32,7 @@ public class FileuploadService {
 
         //파일 이름으로 사용할 uuid 생성
         String uuid = UUID.randomUUID().toString();
+
         int dotIdx = originFileName.lastIndexOf(".");
         String ext = originFileName.substring(dotIdx);
 
